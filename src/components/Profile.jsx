@@ -16,7 +16,7 @@ const Profile = () => {
         <div>
           <h2>Golovach Lolita</h2>
           <p>
-            Date of birth: 19 April <br />
+            Date of birth: 19 April 2003 <br />
             City: Chernivtsi <br />
             Education: Bachelor
           </p>
