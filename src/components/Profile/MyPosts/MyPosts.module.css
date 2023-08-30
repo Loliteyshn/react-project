@@ -1,0 +1,25 @@
+.posts {
+    font-family: 'Karma', serif;
+    padding: 1%;
+}
+
+.input {
+    border: none;
+    width: 20%;
+    height: 30px;
+    margin-right: 10px;
+}
+
+.inputs {
+    display: flex;
+    align-items: center;
+}
+
+.btn {
+    font-family: 'Karma', serif;
+    font-size: 1rem;
+    background-color: #EEA47F;
+    border: none;
+    color: #fff;
+    padding: 10px 20px;
+}
