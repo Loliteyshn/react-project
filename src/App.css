@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Karma:wght@500&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Karma:wght@500&display=swap");
 body {
     width: 80%;
     margin: 0 auto;
@@ -12,4 +12,10 @@ body {
     grid-template-columns: 2fr 10fr;
     row-gap: 20px;
     column-gap: 15px;
+}
+
+.app-wrapper-content {
+    grid-area: c;
+    background-color: #00539C;
+    color: #fff;
 }
