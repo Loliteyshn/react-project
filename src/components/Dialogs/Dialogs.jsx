@@ -1,33 +1,48 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
 import s from "./Dialogs.module.css";
+import DialogItem from "./DialogItem/DialogItem";
+import Message from "./Message/Message";
+import { reduxForm, Field } from "redux-form";
+import { FormControl } from "../common/FormsControls/FormsControls";
+import { maxLengthCreator, requiredField } from "../../utils/validators/validators";
+
+const maxLenght50 = maxLengthCreator(50);
+
+const AddMessageForm = (props) => {
+  return (
+    <form onSubmit={props.handleSubmit}>
+      <div>
+        <Field child="textarea" component={FormControl} name={"newMessageText"} validate={[requiredField, maxLenght50]} />
+      </div>
+      <div>
+        <button>Add</button>
+      </div>
+    </form>
+  )
+}
+
+const AddMessageFormRedux = reduxForm({ form: 'AddMessageForm' })(AddMessageForm);
 
 const Dialogs = (props) => {
+  let dialogs = props.messagesPage.dialogsData.map((dialog) => (
+    <DialogItem name={dialog.name} id={dialog.id} />
+  ));
+
+  let messages = props.messagesPage.messagesData.map((message) => (
+    <Message message={message.message} id={message.id} />
+  ));
+
+  let AddNewMessage = (values) => {
+    console.log(values);
+    props.addMessage(values.newMessageText)
+  }
+
   return (
     <div className={s.dialogs}>
-      <div className={s.dialogsItems}>
-        <div className={s.dialog + " " + s.active}>
-          <NavLink to="/dialogs/1"> Dimych</NavLink>
-        </div>
-        <div className={s.dialog}>
-          <NavLink to="/dialogs/2"> Andrey</NavLink>
-        </div>
-        <div className={s.dialog}>
-          <NavLink to="/dialogs/3"> Sveta</NavLink>
-        </div>
-        <div className={s.dialog}>
-          <NavLink to="/dialogs/4"> Sasha</NavLink>
-        </div>
-        <div className={s.dialog}>
-          <NavLink to="/dialogs/5"> Viktor</NavLink>
-        </div>
-      </div>
+      <div className={s.dialogsItems}>{dialogs}</div>
+      <div className={s.messages}>{messages}</div>
 
-      <div className={s.messages}>
-        <div className={s.message}>Hi</div>
-        <div className={s.message}>How is your project</div>
-        <div className={s.message}>Yow</div>
-      </div>
+      <AddMessageFormRedux onSubmit={AddNewMessage} />
     </div>
   );
 };

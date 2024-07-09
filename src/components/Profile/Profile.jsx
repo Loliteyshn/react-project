@@ -1,28 +1,11 @@
-import style from "./Profile.module.css";
-import mainImg from "../../img/peaches.jpeg";
-import profileImg from "../../img/profile-img.jpeg";
-import MyPosts from "./MyPosts/MyPosts";
+import MyPostsContainer from "./MyPosts/MyPostsContainer";
+import ProfileInfo from "./ProfileInfo/ProfileInfo";
 
-const Profile = () => {
+const Profile = (props) => {
   return (
-    <div >
-      <div>
-        <img src={mainImg} alt="" className={style.mainImg} />
-      </div>
-
-      <div className={style.profile}>
-        <img src={profileImg} alt="" />
-        <div>
-          <h2>Golovach Lolita</h2>
-          <p>
-            Date of birth: 19 April 2003 <br />
-            City: Chernivtsi <br />
-            Education: Bachelor
-          </p>
-        </div>
-      </div>
-
-      <MyPosts />
+    <div>
+      <ProfileInfo profile={props.profile}  />
+      <MyPostsContainer />
     </div>
   );
 };

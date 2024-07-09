@@ -1,18 +1,40 @@
 .dialogs {
     display: grid;
-    grid-template-columns: 2fr 10fr;
+    grid-template-columns: 3fr 9fr;
 }
 
 .dialogsItems {
     padding: 10px;
+    margin-right: 20px;
+    font-family: "Karma", serif;
+    font-size: 1rem;
 }
 
-.dialogsItems .active {
-    color: #EEA47F;
+.active {
+    color: #eea47f;
+    text-decoration: none;
 }
 
-.dialog {}
+.dialog {
+    color: #fff;
+    text-decoration: none;
+}
 
 .messages {
     padding: 10px;
+    display: grid;
+    grid-template-columns: 6fr 6fr
+}
+
+.avatar,
+.messageIcon {
+    width: 30px;
+}
+
+.dialogs input {
+    width: 100px;
+}
+
+.dialogs button {
+    width: 50px;
 }

@@ -1,0 +1,18 @@
+.profile {
+    font-family: 'Karma', serif;
+    display: grid;
+    grid-template-columns: 2fr 10fr;
+    column-gap: 20px;
+}
+
+.mainImg {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.profile img {
+    height: 150px;
+    object-fit: cover;
+    padding: 1%;
+}

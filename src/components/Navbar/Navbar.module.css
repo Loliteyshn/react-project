@@ -21,3 +21,33 @@
     font-family: 'Karma', serif;
     font-size: 1.3rem;
 }
+
+.friends {
+    text-decoration: none;
+    font-family: 'Karma', serif;
+    font-size: 1.5rem;
+    color: #fff;
+    margin: 30px;
+}
+
+.friendsData {
+    display: grid;
+    grid-template-columns: 2fr 2fr 2fr;
+    column-gap: 10px;
+}
+
+.avatar {
+    width: 30px;
+    /* width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #00539C; */
+}
+
+.friendName {
+    font-size: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

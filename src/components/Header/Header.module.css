@@ -3,10 +3,16 @@
     background-color: #00539C;
     display: flex;
     align-items: center;
-    padding-left: 2%;
+    justify-content: space-between;
+    padding: 0 2%;
 }
 
 .header img {
     height: 50px;
     width: 175px;
+}
+
+.loginBlock a {
+    color: white;
+    text-decoration: none;
 }
