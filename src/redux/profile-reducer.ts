@@ -27,7 +27,11 @@ const profileReducer = (state = initialState, action: ActionsType): InitialState
                 message: action.newPostText,
                 likesCount: 0,
             };
-
+                console.log(action.newPostText);
+                console.log({
+                    ...state, newPostText: ''
+                });
+                
             return {
                 ...state,
                 posts: [...state.posts, newPost],
@@ -77,14 +81,13 @@ export const getStatus = (userId: number): ThunkType => async (dispatch) => {
 }
 
 export const updateStatus = (status: string): ThunkType => async (dispatch) => {
-    debugger
     try {
         let data = await profileAPI.updateStatus(status)
         if (data.resultCode === 0) {
             dispatch(actions.setStatus(status));
         }
     } catch (error) {
-        console.log('EROEJINGONG');
+        console.log('Error');
     }
 
 }

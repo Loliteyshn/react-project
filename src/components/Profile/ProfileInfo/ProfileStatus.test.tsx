@@ -4,21 +4,21 @@ import ProfileStatus from "./ProfileStatus"
 
 describe('ProfileStatus component ', () => {
     test('status from props should be in the state', () => {
-        const component = create(<ProfileStatus status='it-kamasutra' updateStatus={(status: string) => {}} />);
+        const component = create(<ProfileStatus />);
         const root = component.root;
         const span = root.findByType("span");
         expect(span.children[0]).toBe("it-kamasutra");
 
     });
     test('after creation span with status should be displayed', () => {
-        const component = create(<ProfileStatus status='it-kamasutra' updateStatus={(status: string) => {}} />);
+        const component = create(<ProfileStatus />);
         const root = component.root;
         const span = root.findByType("span");
         expect(span).not.toBeNull();
 
     });
     test('after creation input shouldn`t be displayed', () => {
-        const component = create(<ProfileStatus status='it-kamasutra' updateStatus={(status: string) => {}} />);
+        const component = create(<ProfileStatus />);
         const root = component.root;
         expect(() => {
             const input = root.findByType("input");
@@ -26,7 +26,7 @@ describe('ProfileStatus component ', () => {
 
     });
     test('input should be displayed in editMode instead of span', () => {
-        const component = create(<ProfileStatus status='it-kamasutra' updateStatus={(status: string) => {}} />);
+        const component = create(<ProfileStatus />);
         const root = component.root;
         const span = root.findByType("span");
         span.props.onDoubleClick();

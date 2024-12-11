@@ -20,6 +20,8 @@ const Chat: FC = () => {
     useEffect(() => {
         dispatch(startMessagesListening())
         return () => {
+            console.log('stop');
+            
             dispatch(stopMessagesListening())
         }
     }, [])

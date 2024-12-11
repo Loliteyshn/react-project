@@ -40,20 +40,18 @@ let ProfileContainer: FC<PropsType> = (props) => {
                     // props.history.push('/login');
                 }
             }
-
         }
         props.getUserProfile(id)
         props.getStatus(id)
 
     }, [userId, props.getUserProfile, props.getStatus]);
 
-    return (<div>
+    return (
         <Profile profile={props.profile}
             isOwner={!userId}
             savePhoto={props.savePhoto}
             saveProfile={props.saveProfile}
         />
-    </div>
     );
 }
 

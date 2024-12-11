@@ -16,10 +16,12 @@
 }
 
 .btn {
-    font-family: 'Karma', serif;
-    font-size: 1rem;
-    background-color: #EEA47F;
-    border: none;
-    color: #fff;
-    padding: 10px 20px;
+    margin-top: 2%;
+}
+
+.span {
+    width: 10px;
+    height: 10px;
+    background-color: #262244;
+    border-radius: 50%;
 }

@@ -2,6 +2,8 @@ import React, { FC } from 'react';
 import { FieldValidatorType } from '../../../utils/validators/validators';
 import styles from './FormsControls.module.css';
 import { Field, WrappedFieldProps } from "redux-form";
+import { FieldValues, RegisterOptions, useFormContext } from 'react-hook-form';
+import { TextField } from '@mui/material';
 
 type FormControlPropsType = {
 	child: "input" | "select" | "textarea",
@@ -46,3 +48,27 @@ export function CreateField<FormKeysType extends string>(placeholder: string,
 }
 
 export type getStringKeys<T> = Extract<keyof T, string>;
+
+type InputType = {
+	name: string
+	placeholder: string
+	type: string
+	validate: RegisterOptions<FieldValues, string>
+}  
+
+export const Input: FC<InputType> = ({ name, placeholder, type, validate }) => {
+	const { register, formState: { errors } } = useFormContext();
+	return (
+	  <div>
+		<TextField id="standard-basic" variant="standard"
+		  type={type}
+		  placeholder={placeholder}
+		  {...register(name, validate)}
+		  className={styles.input}
+		  error={!!errors[name]}
+		  helperText={errors[name]?.message as string || ''}
+		  multiline
+		/>
+	  </div>
+	);
+  };

@@ -1,7 +1,8 @@
 import { FC } from "react";
-import MyPostsContainer from "./MyPosts/MyPostsContainer";
+import MyPosts from "./MyPosts/MyPosts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import { ProfileType } from "../types/types";
+import { Box } from "@mui/material";
 
 type PropsType = {
   savePhoto: (file: any) => void
@@ -11,14 +12,14 @@ type PropsType = {
 }
 
 const Profile: FC<PropsType> = (props) => {
-  return (
-    <div>
-      <ProfileInfo savePhoto={props.savePhoto}
-        isOwner={props.isOwner}
-        profile={props.profile}
-        saveProfile={props.saveProfile} />
-      <MyPostsContainer />
-    </div>
+  return (<>
+    <ProfileInfo savePhoto={props.savePhoto}
+      isOwner={props.isOwner}
+      profile={props.profile}
+      saveProfile={props.saveProfile} />
+    <MyPosts />
+  </>
+
   );
 };
 

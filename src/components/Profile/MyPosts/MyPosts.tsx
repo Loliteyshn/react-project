@@ -1,68 +1,70 @@
-import React, { FC } from "react";
-import style from "./MyPosts.module.css";
-import Post from "./Post/Post";
+import React, { FC, useEffect } from "react";
+import s from "./MyPosts.module.css";
 import ProfileStatus from "../ProfileInfo/ProfileStatus";
-import { InjectedFormProps, reduxForm } from "redux-form";
-import { requiredField, maxLengthCreator } from "../../../utils/validators/validators";
-import { CreateField, FormControl, getStringKeys } from "../../common/FormsControls/FormsControls";
+import { Input } from "../../common/FormsControls/FormsControls";
 import { PostType } from "../../types/types";
+import { getPosts } from "../../../redux/profile-selectors";
+import { useDispatch, useSelector } from "react-redux";
+import { actions } from "../../../redux/profile-reducer";
+import { AppDispatch } from "../../../redux/redux-store";
+import { Button, Divider, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
+import { FormProvider, useForm } from "react-hook-form";
 
-const maxLength10 = maxLengthCreator(10);
-type FormPropsType = {};
-type AddPostFormValuesType = {
-  newPostText: string
-}
-type AddPostFormValuesTypeKeys = getStringKeys<AddPostFormValuesType>
+const MyPosts: FC = React.memo(() => {
+  const posts = useSelector(getPosts);
+  const dispatch: AppDispatch = useDispatch();
+  const methods = useForm<PostType>();
 
-const AddPostForm: FC<InjectedFormProps<AddPostFormValuesType, FormPropsType> & FormPropsType> = ({ handleSubmit }) => {
-  return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        {CreateField<AddPostFormValuesTypeKeys>("Post text", "newPostText", [requiredField, maxLength10], "textarea")}
-        {/* <Field child="textarea" component={FormControl} name={"newPostText"} validate={[requiredField, maxLength10]} placeholder="Post message" /> */}
-      </div>
-      <div>
-        <button>Login</button>
-      </div>
-    </form>
-  )
-}
-
-const AddPostReduxForm = reduxForm<AddPostFormValuesType, FormPropsType>({ form: 'AddPost' })(AddPostForm);
-
-export type MapStatePropsType = {
-  posts: Array<PostType>
-  status: string
-}
-export type MapDispatchPropsType = {
-  addPost: (text: string) => void
-  updateStatus: (status: string) => void
-}
-
-const MyPosts: FC<MapStatePropsType & MapDispatchPropsType> = React.memo(({ posts, addPost, status, updateStatus }) => {
-  let postsElements = posts.map((post) => {
-    return (
-      <Post post={post} key={post.id} />
-    );
-  });
-
-  let AddPost = (formData: AddPostFormValuesType) => {
-    addPost(formData.newPostText);
+  const onSubmit = (formData: PostType) => {
+    dispatch(actions.addPost(formData.message));
+    methods.reset()
   }
 
   return (
-    <div className={style.posts}>
-      <ProfileStatus status={status} updateStatus={updateStatus} />
+    <div className={s.posts}>
+      <ProfileStatus />
 
       <h3>My posts</h3>
-      <div className={style.flex}>
-        <AddPostReduxForm onSubmit={AddPost} />
+      <div>
+        <FormProvider {...methods}>
+          <form onSubmit={methods.handleSubmit(onSubmit)}>
+            <Input type="text"
+              name='message'
+              placeholder='Post Text'
+              validate={{
+                minLength: { value: 2, message: 'Post text must be at least 1 character' }
+              }}
+            />
+            <Button variant="contained" color="secondary" type="submit" className={s.btn}>Save</Button>
+          </form>
+        </FormProvider>
       </div>
 
-      <div>{postsElements}</div>
+      <div><Posts posts={posts} /></div>
     </div>
   );
 });
+
+type PostsPropsType = {
+  posts: PostType[]
+}
+const Posts: FC<PostsPropsType> = ({ posts }) => {
+  return (
+    posts.map(post => (
+      <List>
+        <ListItem disablePadding>
+          <ListItemButton>
+            <ListItemIcon>
+              <span className={s.span}></span>
+            </ListItemIcon>
+            <ListItemText primary={post.message} />
+          </ListItemButton>
+        </ListItem>
+        <Divider />
+      </List>
+    ))
+  )
+}
 
 
 export default MyPosts;
